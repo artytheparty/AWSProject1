@@ -104,21 +104,14 @@ func ReadLSCPUCommand() LSCPU {
 	lscpuHOLDER.CPUMHz = string(cpuMhz)[21 : len(string(cpuMhz))-1]
 
 	//populating max cpu mhz
-	cpuMAXMhz, err := exec.Command("grep", "CPU max MHz", systemInfoLoc).Output()
-	if err != nil {
-		log.Fatalf("%s: %s", err, "grabbing CPU max MHz failed")
-	}
+	cpuMAXMhz := "N/A"
 	//fmt.Println(string(cpuMAXMhz)[21 : len(string(cpuMAXMhz))-1])
-	lscpuHOLDER.CPUmaxMHz = string(cpuMAXMhz)[21 : len(string(cpuMAXMhz))-1]
+	lscpuHOLDER.CPUmaxMHz = cpuMAXMhz
 
 	//populating min cpu mhz
-	cpuMINMhz, err := exec.Command("grep", "CPU min MHz", systemInfoLoc).Output()
-	if err != nil {
-		log.Fatalf("%s: %s", err, "grabbing CPU min MHz failed")
-	}
+	cpuMINMhz := "N/A"
 	//fmt.Println(string(cpuMINMhz)[21 : len(string(cpuMINMhz))-1])
-	lscpuHOLDER.CPUminMHz = string(cpuMINMhz)[21 : len(string(cpuMINMhz))-1]
-
+	lscpuHOLDER.CPUminMHz = cpuMINMhz
 	//populating virtualization variable
 	virt, err := exec.Command("grep", "Virtualiza", systemInfoLoc).Output()
 	if err != nil {
